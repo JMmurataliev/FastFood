@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -18,16 +19,21 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     private List<FoodItem> foodItems;
     private int selectedPosition = -1;
+    private OnFoodItemClickListener listener;
 
-    public FoodAdapter(List<FoodItem> foodItems) {
+    public interface OnFoodItemClickListener {
+        void onFoodItemClick(FoodItem item, int position);
+    }
+
+    public FoodAdapter(List<FoodItem> foodItems, OnFoodItemClickListener listener) {
         this.foodItems = foodItems;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food, parent, false);
-        view.setBackgroundColor(Color.TRANSPARENT);
         return new FoodViewHolder(view);
     }
 
@@ -42,43 +48,61 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
 
         if (position == selectedPosition) {
-            holder.foodName.setTextColor(Color.RED);
-            holder.foodPrice.setTextColor(Color.RED);
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+            holder.foodName.setTextColor(Color.GRAY);
+            holder.foodPrice.setTextColor(Color.GRAY);
+            holder.container.setBackgroundResource(R.drawable.bg_gray);
         } else {
             holder.foodName.setTextColor(Color.GRAY);
             holder.foodPrice.setTextColor(Color.GRAY);
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+            holder.container.setBackgroundColor(Color.TRANSPARENT);
         }
 
+
         holder.itemView.setOnClickListener(v -> {
-            if (position == selectedPosition) {
-                return;
+            selectItem(holder.getAdapterPosition());
+            if (listener != null) {
+                listener.onFoodItemClick(foodItem, holder.getAdapterPosition());
             }
+        });
+    }
 
-            int previousSelected = selectedPosition;
-            if (previousSelected != -1) {
-                notifyItemChanged(previousSelected);
-            }
+    public void selectItem(int position) {
+        if (position == selectedPosition) {
+            return;
+        }
 
-            selectedPosition = position;
-            Animation scaleUp = AnimationUtils.loadAnimation(v.getContext(), R.anim.scale_up);
-            v.startAnimation(scaleUp);
+        int previousSelected = selectedPosition;
+        selectedPosition = position;
+
+
+        if (position != -1) {
+
             if (selectedPosition != 0) {
                 FoodItem selected = foodItems.remove(position);
                 foodItems.add(0, selected);
                 notifyItemMoved(position, 0);
                 selectedPosition = 0;
             }
+        }
 
-            notifyItemChanged(0);
-        });
+        notifyItemChanged(previousSelected);
+        notifyItemChanged(selectedPosition);
+    }
+
+    public void selectItemByName(String name) {
+        for (int i = 0; i < foodItems.size(); i++) {
+            if (foodItems.get(i).getName().toLowerCase().contains(name.toLowerCase())) {
+                selectItem(i);
+                break;
+            }
+        }
     }
 
     @Override
     public int getItemCount() {
         return foodItems.size();
     }
+
     public void updateList(List<FoodItem> newList) {
         foodItems = newList;
         selectedPosition = -1;
@@ -90,6 +114,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         TextView foodName;
         TextView foodPrice;
         RatingBar ratingBar;
+        LinearLayout container;
 
         FoodViewHolder(View itemView) {
             super(itemView);
@@ -97,7 +122,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             foodName = itemView.findViewById(R.id.foodName);
             foodPrice = itemView.findViewById(R.id.foodPrice);
             ratingBar = itemView.findViewById(R.id.ratingBar);
-            itemView.setBackgroundColor(Color.TRANSPARENT);
+            container = (LinearLayout) ((ViewGroup) itemView).getChildAt(0);
         }
     }
 } 

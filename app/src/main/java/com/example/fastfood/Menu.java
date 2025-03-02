@@ -68,7 +68,7 @@ public class Menu extends AppCompatActivity {
         categoryRecyclerView.setLayoutManager(categoryLayoutManager);
         categoryRecyclerView.setHasFixedSize(true);
         categoryRecyclerView.setNestedScrollingEnabled(true);
-
+        
         int categorySpacing = getResources().getDimensionPixelSize(R.dimen.item_spacing);
         categoryRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -83,18 +83,15 @@ public class Menu extends AppCompatActivity {
         
         categoryList = new ArrayList<>();
         categoryAdapter = new CategoryAdapter(categoryList, position -> {
-
             filterFoodByCategory(categoryList.get(position).getName());
         });
         categoryRecyclerView.setAdapter(categoryAdapter);
 
-
         LinearLayoutManager foodLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         foodItemsRecyclerView.setLayoutManager(foodLayoutManager);
-
         foodItemsRecyclerView.setHasFixedSize(true);
         foodItemsRecyclerView.setNestedScrollingEnabled(true);
-
+        
         int spacing = getResources().getDimensionPixelSize(R.dimen.item_spacing);
         foodItemsRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -108,7 +105,9 @@ public class Menu extends AppCompatActivity {
         });
         
         foodItemList = new ArrayList<>();
-        foodAdapter = new FoodAdapter(foodItemList);
+        foodAdapter = new FoodAdapter(foodItemList, (item, position) -> {
+            foodItemsRecyclerView.smoothScrollToPosition(0);
+        });
         foodItemsRecyclerView.setAdapter(foodAdapter);
     }
 
@@ -135,7 +134,12 @@ public class Menu extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterFood(s.toString());
+                String searchText = s.toString().trim();
+                if (searchText.isEmpty()) {
+                    foodAdapter.updateList(foodItemList);
+                } else {
+                    foodAdapter.selectItemByName(searchText);
+                }
             }
 
             @Override

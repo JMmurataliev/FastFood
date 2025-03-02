@@ -66,10 +66,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 price = holder.itemView.findViewById(R.id.sushi_price);
                 break;
             default:
-                container = holder.itemView.findViewById(R.id.dessert_container);
-                image = holder.itemView.findViewById(R.id.dessert_image);
-                name = holder.itemView.findViewById(R.id.dessert_name);
-                price = holder.itemView.findViewById(R.id.dessert_price);
+                container = holder.itemView.findViewById(R.id.burger_container);
+                image = holder.itemView.findViewById(R.id.burger_image);
+                name = holder.itemView.findViewById(R.id.burger_name);
+                price = holder.itemView.findViewById(R.id.burger_price);
                 break;
         }
         image.setImageResource(category.getImageResource());
