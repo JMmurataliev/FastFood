@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecondActivity">
+
+    <TextView
+        android:id="@+id/sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/black"
+        android:text="Sign up"
+        android:textColor="@color/rose"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_marginEnd="42dp"
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_up"
+        app:layout_constraintVertical_bias="0.342">
+
+        <EditText
+            android:textColor="@color/black"
+            android:id="@+id/email"
+            android:layout_width="327dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="42dp"
+            android:background="@drawable/bg_register"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Email Address"
+            android:paddingStart="20dp"
+            android:textColorHint="@color/black"
+            android:textStyle="normal" />
+
+        <EditText
+            android:textColor="@color/black"
+            android:id="@+id/password"
+            android:layout_width="327dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_register"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Password"
+            android:paddingStart="20dp"
+            android:textColorHint="@color/black"
+            android:textStyle="normal" />
+
+        <EditText
+            android:textColor="@color/black"
+            android:id="@+id/conf_passw"
+            android:layout_width="327dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_register"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Confirm Password"
+            android:paddingStart="20dp"
+            android:textColorHint="@color/black"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Forget Password?"
+            android:textColor="@color/red"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login"
+        android:layout_width="327dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="39dp"
+        android:background="@drawable/bg_button"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Log in"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/or"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login"
+        android:layout_width="327dp"
+        android:layout_height="31dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="47dp"
+        android:layout_marginBottom="16dp">
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="1dp"
+            android:background="@color/darkgray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="OR"
+            android:textColor="@color/rose"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="1dp"
+            android:background="@color/darkgray"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/end"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/or"
+        app:layout_constraintVertical_bias="0.566">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/google"
+            android:layout_width="327dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_buttonwhite1"
+            android:text="Sign in with Google"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/facebook"
+            android:layout_width="327dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_buttonwhite1"
+            android:text="Sign in with Facebook"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ic_google"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="60dp"
+        android:src="@drawable/google"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/end" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="130dp"
+        android:src="@drawable/facebook"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/end" />
+
+    <ImageView
+        android:id="@+id/ic_back"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginVertical="88dp"
+        android:src="@drawable/ic_eye"
+        app:layout_constraintEnd_toEndOf="@id/register"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="@id/register"
+        app:layout_constraintTop_toTopOf="@id/register" />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="305dp"
+        android:layout_marginTop="40dp"
+        android:clickable="true"
+        android:onClick="go_Back"
+        android:src="@drawable/ic_back2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 
